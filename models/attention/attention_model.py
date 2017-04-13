@@ -249,12 +249,12 @@ with tf.Session(config=config_proto) as sess:
             train_res = calculateAccuracy(snli.trainNextBatch, batch_size)
             results['train_loss'].append(train_res[0])
             results['train_acc'].append(train_res[1])
-            print "Train Loss= %f, Accuracy= %f" % (train_res[0], train_res[1])
+            print ("Train Loss= %f, Accuracy= %f" % (train_res[0], train_res[1]))
             
             dev_res = calculateAccuracy(snli.devNextBatch, batch_size)
             results['dev_loss'].append(dev_res[0])
             results['dev_acc'].append(dev_res[1])
-            print "Dev Loss= %f, Accuracy= %f" % (dev_res[0], dev_res[1])
+            print ("Dev Loss= %f, Accuracy= %f" % (dev_res[0], dev_res[1]))
 
             if(dev_res[1] > best_dev_accuracy):
                 best_dev_accuracy = dev_res[1]
@@ -273,7 +273,7 @@ with tf.Session(config=config_proto) as sess:
 
         cur_epoch = cur_epoch + 1
 
-    print "Optimization Finished! Best acc %f Best epoch %d" % (best_dev_accuracy, best_epoch)
+    print ("Optimization Finished! Best acc %f Best epoch %d" % (best_dev_accuracy, best_epoch))
 
 # Launch the graph
 with tf.Session(config=config_proto) as sess:
