@@ -121,25 +121,25 @@ with tf.Session(config=config_proto) as sess:
 	# Keep training until reach max iterations
 	while cur_epoch <= max_epochs:
 
-		print "Epoch: %d" % (cur_epoch)
-		print "Training"
+		print ("Epoch: %d" % (cur_epoch))
+		print ("Training")
 
 		for batch_x_left, batch_x_right, batch_true_output in snli.trainNextBatch(batch_size):
 			res = sess.run([optimizer], feed_dict={x_left: batch_x_left, x_right: batch_x_right, true_output: batch_true_output, keep_prob: keep_prob_v})
 
 		if cur_epoch % display_epoch == 0:
 
-			print "Calculating Accuracy"
+			print ("Calculating Accuracy")
 			
 			train_res = calculateAccuracy(snli.trainNextBatch, batch_size)
 			results['train_loss'].append(train_res[0])
 			results['train_acc'].append(train_res[1])
-			print "Train Loss= %f, Accuracy= %f" % (train_res[0], train_res[1])
+			print ("Train Loss= %f, Accuracy= %f" % (train_res[0], train_res[1]))
 			
 			dev_res = calculateAccuracy(snli.devNextBatch, batch_size)
 			results['dev_loss'].append(dev_res[0])
 			results['dev_acc'].append(dev_res[1])
-			print "Dev Loss= %f, Accuracy= %f" % (dev_res[0], dev_res[1])
+			print ("Dev Loss= %f, Accuracy= %f" % (dev_res[0], dev_res[1]))
 
 			if(dev_res[1] > best_dev_accuracy):
 				best_dev_accuracy = dev_res[1]
@@ -154,13 +154,13 @@ with tf.Session(config=config_proto) as sess:
 
 		cur_epoch = cur_epoch + 1
 
-	print "Optimization Finished! Best epoch %d" % (best_epoch)
+	print ("Optimization Finished! Best epoch %d" % (best_epoch))
 
 # Launch the graph
 with tf.Session(config=config_proto) as sess:
 	saver.restore(sess, "./saved_model/saved_model.ckpt")
 	test_res = calculateAccuracy(snli.testNextBatch, batch_size)
-	print "Test Loss= %f, Accuracy= %f" % (test_res[0], test_res[1])
+	print ("Test Loss= %f, Accuracy= %f" % (test_res[0], test_res[1]))
 
 ep = np.asarray(list(range(display_epoch, len(results['train_loss']) * display_epoch + 1, display_epoch)))
 

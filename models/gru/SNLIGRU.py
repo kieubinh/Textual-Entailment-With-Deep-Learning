@@ -1,5 +1,5 @@
 import numpy as np
-import cPickle
+import _pickle as cPickle
 import os
 
 embeddings_file_name = '../../data/preprocessed_embeddings.cpkl'

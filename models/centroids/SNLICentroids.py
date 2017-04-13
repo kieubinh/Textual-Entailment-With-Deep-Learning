@@ -1,6 +1,6 @@
 import numpy as np
 import os
-import cPickle
+import _pickle as cPickle
 
 centroids_file_name = 'generated_centroids/generated_centroids.pickle'
 
