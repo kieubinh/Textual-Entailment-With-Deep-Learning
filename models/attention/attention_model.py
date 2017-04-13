@@ -3,7 +3,7 @@ import numpy as np
 from SNLIAttention import SNLI
 import sys
 import matplotlib.pyplot as plt
-import cPickle
+import _pickle as cPickle
 import os
 
 LOAD_PREVIOUS = (len(sys.argv) == 2 and sys.argv[1] == 'l')
