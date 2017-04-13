@@ -236,15 +236,15 @@ with tf.Session(config=config_proto) as sess:
 
     while cur_epoch <= max_epochs:
 
-        print "Epoch: %d" % (cur_epoch)
-        print "Training"
+        print("Epoch: %d" %cur_epoch)
+        print("Training")
 
         for batch_x_left, batch_x_right, batch_true_output in snli.trainNextBatch(batch_size):
             res = sess.run([optimizer], feed_dict={x_left_p: batch_x_left[0], x_left_max_len: batch_x_left[1], x_right_p: batch_x_right[0], x_right_max_len: batch_x_right[1], true_output: batch_true_output, keep_prob: keep_prob_v, smallest_number: np.asarray([-999999999])})
 
         if cur_epoch % display_epoch == 0:
 
-            print "Calculating Accuracy"
+            print("Calculating Accuracy")
             
             train_res = calculateAccuracy(snli.trainNextBatch, batch_size)
             results['train_loss'].append(train_res[0])
@@ -279,7 +279,7 @@ with tf.Session(config=config_proto) as sess:
 with tf.Session(config=config_proto) as sess:
     saver.restore(sess, "./saved_model/saved_model.ckpt")
     test_res = calculateAccuracy(snli.testNextBatch, batch_size)
-    print "Test Loss= %f, Accuracy= %f" % (test_res[0], test_res[1])
+    print ("Test Loss= %f, Accuracy= %f" % (test_res[0], test_res[1]))
 
 ep = np.asarray(list(range(display_epoch, len(results['train_loss']) * display_epoch + 1, display_epoch)))
 
